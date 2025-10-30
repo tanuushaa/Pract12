@@ -1,0 +1,47 @@
+namespace ConsoleApp43
+{
+    class Car
+    {
+        // поле (скорость)
+        private int speed;
+        // свойство 
+        public int Speed
+        {
+            get
+            {
+                return speed;
+            }
+            set
+            {
+                if (value < 0 || value > 300)
+
+                {
+                    Console.WriteLine("Скорость должна быть от 0 до 300 км/ч");
+                }
+                speed = value;
+            }
+        }
+        // авто-свойство 
+        public string Model1 { get; set; } = "Unknown";
+        // конструктор с параметрами 
+        public Car(String model, int speed)
+        {
+           Model1 = model;
+           Speed = speed;
+        }
+        // конструктор вывода
+        public void Drive()
+        {
+            Console.WriteLine($"{Model1} едет со скоростью {Speed} км/ч");
+        }
+    }
+    class Car2
+    {
+        static void Main(string[] args)
+        {
+            Car myCar = new Car("BMW", 160);
+            myCar.Drive();
+
+        }
+    }
+}
