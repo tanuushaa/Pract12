@@ -1,0 +1,64 @@
+namespace ConsoleApp47
+{
+    class Product
+    {
+        private decimal price;
+        private decimal discount;
+
+        public string Name { get; set; } = "";
+        public decimal Price
+        {
+            get { return price; }
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Цена не может быть отрицательной");
+                }
+                price = value;
+            }
+        }
+        public decimal Discount
+        {
+            get { return discount; }
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Скидка должна быть от 0 до 100");
+                }
+                discount = value;
+            }
+        }
+        public decimal FinalPrice => Price * (1 - Discount / 100);
+
+        public Product(decimal price, decimal discount)
+        {
+            Price = price;
+            Discount = discount;
+        }
+        public void Show()
+        {
+            Console.WriteLine($"{Name}: Финальная цена: {FinalPrice} (Скидка: {Discount}%)");
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Product product = new Product(100, 20);
+                product.Name = "Ноутбук";
+                product.Show();
+                product.Discount = 30;
+                product.Show();
+                product.Price = -50;
+            }
+            catch(Exception ex) 
+            {
+            Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+        }
+    }
+}
