@@ -1,0 +1,90 @@
+namespace ConsoleApp46
+{
+    public class Player
+        // поля
+    {
+        private string name;
+        private int level;
+        private int health;
+
+        // конструктор для имени
+        public string Name
+        {
+            get { return name; } 
+            set { name = value; }
+        }
+
+        // конструктор для уровня
+        public int Level
+        {
+            get { return level; }
+            set
+            {
+                if (value < 1 || value > 100)
+                {
+                    throw new ArgumentOutOfRangeException("Уровень должен быть от 1 до 100");
+                }
+                level = value;
+            }
+        }
+
+        // констуктор для здоровья
+        public int Health
+        {
+            get { return Health; }
+            set
+            {
+                if (value < 1 || value > 100)
+                {
+                    throw new ArgumentOutOfRangeException("Здоровье должно быть от 1 до 100");
+                }
+                health = value;
+            }
+        }
+
+        //для чтения
+        public bool IsAlive => health > 0;
+
+        // конструктор
+        public Player(string name, int level, int health)
+        {
+            Name = name;
+            Level = level;
+            Health = health;
+        }
+
+        // метод для получения урона
+        public void TakeDamage(int damage)
+        {
+            if (damage > 0)
+            {
+                Console.WriteLine("Урон не может быть отрицательным");
+            }
+            Health -= damage;
+
+            if (Health < 0) Health = 0;
+            {
+                Console.WriteLine($"{Name} получил урон: {damage}. Текущее здоровье: {Health}. Статус:{(IsAlive ? "Жив" : "Мёртв" )}");    
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Player player = new Player("Герой", 10, 100);
+                Console.WriteLine($"Создан игрок: {player.Name}, Уровень: {player.Level}, Здоровье: {player.Health}");
+
+                player.TakeDamage(30);
+                player.TakeDamage(80);
+                player.Level = 0;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+        }
+    }
+}
