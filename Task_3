@@ -1,0 +1,56 @@
+namespace ConsoleApp45
+{
+     class Book
+    {
+        //поля
+        private string title;
+        private int pages;
+
+        //свойства
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                if(string.IsNullOrEmpty(value))
+                {
+                    Console.WriteLine("Название книги не может быть пустым или null.");
+                }
+                title = value;
+            }
+        }
+        // конструктор 
+        public int Pages { get; set; } = 1;
+        // конструктор для чтения
+        public bool IsLong => Pages > 300;
+
+        // конструктор для названия
+        public Book(string title)
+        {
+            this.title = title;
+        }
+        // конструктор для вывода информации
+        public void Info()
+        {
+            Console.WriteLine($"Книга: {Title}, страниц: {Pages}, длинная: {(IsLong ? "да" : "нет")}");
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                Book myBook = new Book("Война и мир");
+                myBook.Pages = 350;
+                myBook.Info();
+                Book booki = new Book("");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($" Ошибка: {ex.Message}");
+            }
+        }
+    }
+}
