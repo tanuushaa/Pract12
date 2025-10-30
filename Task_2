@@ -1,0 +1,43 @@
+namespace ConsoleApp44
+{
+     class Phone
+    {
+        // поле
+        private int battery;
+        // свойства
+        public int BatteryLevel
+        {
+            get => battery;
+            set
+            {
+                battery = Math.Max(0,Math.Min(100, value));
+            }
+        }
+        // авто-свойство
+        public string Brand { get; init; }
+        // конструктор
+        public Phone ( string brand, int battery )
+        {
+            Brand = brand;
+            BatteryLevel = battery;
+        }
+        // метод использования телефона
+        public void Use()
+        {
+            BatteryLevel = Math.Max(0, BatteryLevel - 10);
+            Console.WriteLine($"{Brand}: заряд {BatteryLevel} %");
+        }
+    }
+    class Phone2
+    {
+        static void Main(string[] args)
+        {
+            var phone = new Phone("Apple", 100);
+            phone.Use();
+            phone.Use();
+            phone.Use();
+            phone.BatteryLevel = 150;
+            Console.WriteLine($"{phone.Brand}: заряд после попытки установить 150 % - {phone.BatteryLevel}% ");
+        }
+    }
+}
